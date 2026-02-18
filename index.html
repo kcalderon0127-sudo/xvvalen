@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mis XV Años - Valentina</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Montserrat:wght@300;500&display=swap" rel="stylesheet">
+<style>
+body{
+margin:0;
+font-family:'Montserrat',sans-serif;
+background:black;
+color:white;
+text-align:center;
+overflow-x:hidden;
+}
+
+.section{
+min-height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+padding:30px;
+}
+
+.silver-title{
+font-family:'Playfair Display',serif;
+font-size:40px;
+background:linear-gradient(90deg,#d9d9d9,#ffffff,#bfbfbf);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+margin-bottom:20px;
+}
+
+.button{
+border:1px solid #d9d9d9;
+padding:15px 30px;
+border-radius:40px;
+color:white;
+background:transparent;
+font-size:16px;
+cursor:pointer;
+margin-top:20px;
+}
+
+.countdown{
+display:flex;
+gap:15px;
+margin-top:20px;
+}
+
+.count-box{
+border:1px solid #aaa;
+padding:10px;
+border-radius:10px;
+}
+
+input,select{
+padding:10px;
+margin:10px;
+border-radius:8px;
+border:none;
+width:80%;
+}
+</style>
+</head>
+<body>
+
+
+
+<audio id="musica" loop preload="auto">
+  <source src="./musica.mp3.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+
+  const boton = document.querySelector(".button");
+
+  boton.addEventListener("click", function() {
+    const audio = document.getElementById("musica");
+    audio.volume = 0.8;
+    audio.play();
+  });
+
+});
+</script>
+<!-- FASE 1 -->
+<div class="section" id="intro">
+<h1 class="silver-title">MIS XV AÑOS</h1>
+<button class="button" onclick="startInvitation()">Entrar a la fiesta</button>
+</div>
+
+<!-- FASE 2 -->
+<div class="section" id="main" style="display:none;">
+<h2 class="silver-title">Valentina Calderón Vega</h2>
+<img src="Foto3.png" style="width:90%;border-radius:20px;">
+<div id="countdown" class="countdown"></div>
+
+<p>03 de octubre de 2026<br>5:00 p.m.<br>Pronatura Park</p>
+
+<button class="button" onclick="openWaze()">Ver en Waze</button>
+
+<h3 id="espaciosText"></h3>
+
+<input type="text" id="nombre" placeholder="Tu nombre">
+
+<select id="asistiran"></select>
+
+<button class="button" onclick="confirmar()">Confirmar asistencia</button>
+</div>
+
+<script>
+const params = new URLSearchParams(window.location.search);
+const invitado = params.get('invitado') || "Invitado";
+const espacios = parseInt(params.get('espacios')) || 1;
+
+document.getElementById("espaciosText").innerText =
+"Espacios reservados para ti: " + espacios;
+
+const select = document.getElementById("asistiran");
+for(let i=1;i<=espacios;i++){
+let option = document.createElement("option");
+option.value=i;
+option.text=i;
+select.appendChild(option);
+}
+
+function startInvitation(){
+document.getElementById("intro").style.display="none";
+document.getElementById("main").style.display="flex";
+const music=document.getElementById("music");
+music.volume=10;
+music.play();
+}
+
+function openWaze(){
+window.open("https://waze.com/ul?q=Pronatura%20Park");
+}
+
+function confirmar(){
+const nombre=document.getElementById("nombre").value;
+const cantidad=document.getElementById("asistiran").value;
+
+const mensaje=`Hola, confirmo asistencia a los XV años de Valentina Calderón Vega.
+Invitado: ${invitado}
+Nombre: ${nombre}
+Espacios asignados: ${espacios}
+Confirmados: ${cantidad}`;
+
+window.open(`https://wa.me/50683466734?text=${encodeURIComponent(mensaje)}`);
+}
+
+function updateCountdown(){
+const eventDate=new Date("Oct 3, 2026 17:00:00").getTime();
+const now=new Date().getTime();
+const diff=eventDate-now;
+
+const days=Math.floor(diff/(1000*60*60*24));
+const hours=Math.floor((diff%(1000*60*60*24))/(1000*60*60));
+const minutes=Math.floor((diff%(1000*60*60))/(1000*60));
+const seconds=Math.floor((diff%(1000*60))/1000);
+
+document.getElementById("countdown").innerHTML=`
+<div class="count-box">${days} Días</div>
+<div class="count-box">${hours} Horas</div>
+<div class="count-box">${minutes} Min</div>
+<div class="count-box">${seconds} Seg</div>`;
+}
+
+setInterval(updateCountdown,1000);
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
