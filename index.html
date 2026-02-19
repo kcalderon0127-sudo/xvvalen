@@ -9,38 +9,6 @@
 
 <style>
 
-.menu-premium{
-display:flex;
-flex-direction:column;
-gap:15px;
-margin-top:25px;
-width:80%;
-max-width:320px;
-}
-
-.btn-premium{
-padding:16px;
-border-radius:40px;
-border:1px solid rgba(255,255,255,0.3);
-background:linear-gradient(145deg, rgba(255,255,255,0.15), rgba(255,255,255,0.05));
-color:white;
-font-size:14px;
-letter-spacing:2px;
-backdrop-filter:blur(10px);
-cursor:pointer;
-transition:all 0.4s ease;
-box-shadow:
-0 0 10px rgba(255,255,255,0.1),
-inset 0 0 10px rgba(255,255,255,0.05);
-}
-
-.btn-premium:hover{
-transform:scale(1.05);
-box-shadow:
-0 0 20px rgba(255,255,255,0.3),
-inset 0 0 15px rgba(255,255,255,0.1);
-}
-
 body{
 margin:0;
 font-family:'Montserrat',sans-serif;
@@ -49,6 +17,8 @@ color:white;
 text-align:center;
 overflow-x:hidden;
 }
+
+/* SECCIONES */
 
 .section{
 min-height:100vh;
@@ -59,18 +29,22 @@ align-items:center;
 padding:30px;
 }
 
+/* TITULO PLATEADO */
+
 .silver-title{
 font-family:'Playfair Display',serif;
-font-size:40px;
+font-size:42px;
 background:linear-gradient(90deg,#d9d9d9,#ffffff,#bfbfbf);
 -webkit-background-clip:text;
 -webkit-text-fill-color:transparent;
 margin-bottom:20px;
 }
 
+/* BOTON PRINCIPAL */
+
 .button{
-border:1px solid #d9d9d9;
-padding:15px 30px;
+border:1px solid rgba(255,255,255,0.5);
+padding:15px 35px;
 border-radius:40px;
 color:white;
 background:transparent;
@@ -79,41 +53,71 @@ cursor:pointer;
 margin-top:20px;
 }
 
+/* MENU PREMIUM */
+
+.menu-premium{
+display:flex;
+flex-direction:column;
+gap:15px;
+margin-top:30px;
+width:80%;
+max-width:320px;
+}
+
+.btn-premium{
+
+padding:16px;
+
+border-radius:40px;
+
+border:1px solid rgba(255,255,255,0.3);
+
+background:linear-gradient(
+145deg,
+rgba(255,255,255,0.15),
+rgba(255,255,255,0.05)
+);
+
+color:white;
+
+font-size:14px;
+
+letter-spacing:2px;
+
+backdrop-filter:blur(10px);
+
+cursor:pointer;
+
+transition:0.4s;
+
+box-shadow:
+0 0 10px rgba(255,255,255,0.1),
+inset 0 0 10px rgba(255,255,255,0.05);
+
+}
+
+.btn-premium:hover{
+
+transform:scale(1.05);
+
+box-shadow:
+0 0 25px rgba(255,255,255,0.4),
+inset 0 0 15px rgba(255,255,255,0.1);
+
+}
+
+/* COUNTDOWN */
+
 .countdown{
 display:flex;
-gap:15px;
+gap:10px;
 margin-top:20px;
 }
 
 .count-box{
-border:1px solid #aaa;
+border:1px solid rgba(255,255,255,0.3);
 padding:10px;
 border-radius:10px;
-}
-
-input,select{
-padding:10px;
-margin:10px;
-border-radius:8px;
-border:none;
-width:80%;
-}
-
-/* BOLA */
-.bola {
-position: fixed;
-top: 40px;
-left: 50%;
-transform: translateX(-50%);
-width: 150px;
-animation: girar 6s linear infinite;
-filter: drop-shadow(0px 10px 20px rgba(255,255,255,0.4));
-z-index: 1000;
-}
-
-@keyframes girar {
-0% { transform: translateX(-50%) rotate(0deg); }
-100% { transform: translateX(-50%) rotate(360deg); }
 }
 
 /* MODAL */
@@ -133,65 +137,62 @@ z-index:9999;
 
 .modal-content{
 text-align:center;
-color:white;
 animation:fadeIn 0.4s ease;
 }
 
 .close{
 position:absolute;
-top:20px;
-right:25px;
-font-size:30px;
+top:25px;
+right:30px;
+font-size:35px;
 cursor:pointer;
 }
 
 @keyframes fadeIn{
-from{
-opacity:0;
-transform:scale(0.9);
-}
-to{
-opacity:1;
-transform:scale(1);
-}
+from{opacity:0; transform:scale(0.8);}
+to{opacity:1; transform:scale(1);}
 }
 
 </style>
+
 </head>
 
 <body>
 
-<!-- MODAL -->
+<!-- AUDIO -->
+
+<audio id="musica" loop preload="auto">
+<source src="./musica.mp3.mp3" type="audio/mpeg">
+</audio>
+
+
+<!-- MODAL DRESS CODE -->
+
 <div id="dressModal" class="modal">
 
 <div class="modal-content">
 
 <span class="close" onclick="cerrarDressCode()">&times;</span>
 
-<h2 class="silver-title">
-Código de Vestimenta
-</h2>
+<h2 class="silver-title">Código de Vestimenta</h2>
 
-<p>
+<p style="font-size:20px">
+
 Formal elegante<br><br>
+
 Tonos plateados, grises o claros<br><br>
+
 Evitar blanco
+
 </p>
 
 </div>
+
 </div>
 
 
-<!-- BOLA -->
-<img src="bola.png" class="bola">
-
-<!-- AUDIO -->
-<audio id="musica" loop preload="auto">
-<source src="./musica.mp3.mp3" type="audio/mpeg">
-</audio>
-
-
 <!-- INTRO -->
+
 <div class="section" id="intro">
 
 <h1 class="silver-title">MIS XV AÑOS</h1>
@@ -204,6 +205,7 @@ Entrar a la fiesta
 
 
 <!-- MAIN -->
+
 <div class="section" id="main" style="display:none;">
 
 <h2 class="silver-title">Valentina Calderón Vega</h2>
@@ -213,10 +215,13 @@ Entrar a la fiesta
 <div id="countdown" class="countdown"></div>
 
 <p>
+
 03 de octubre de 2026<br>
 5:00 p.m.<br>
 Pronatura Park
+
 </p>
+
 
 <div class="menu-premium">
 
@@ -228,8 +233,16 @@ Pronatura Park
 👗 CÓDIGO DE VESTIMENTA
 </button>
 
+<button class="btn-premium" onclick="agregarCalendario()">
+📅 AGENDAR EVENTO
+</button>
+
 <button class="btn-premium" onclick="confirmar()">
 💌 CONFIRMAR ASISTENCIA
+</button>
+
+<button class="btn-premium" onclick="abrirMapa()">
+🗺️ VER MAPA
 </button>
 
 </div>
@@ -238,6 +251,8 @@ Pronatura Park
 
 
 <script>
+
+/* INICIAR */
 
 function startInvitation(){
 
@@ -250,9 +265,47 @@ music.play();
 
 }
 
+
+/* WAZE */
+
 function openWaze(){
 window.open("https://waze.com/ul?q=Pronatura%20Park");
 }
+
+
+/* GOOGLE MAPS */
+
+function abrirMapa(){
+window.open("https://www.google.com/maps/search/?api=1&query=Pronatura+Park");
+}
+
+
+/* CALENDARIO */
+
+function agregarCalendario(){
+
+const fecha="20261003T170000";
+const fechaFin="20261003T230000";
+
+const url=`https://calendar.google.com/calendar/render?action=TEMPLATE&text=XV%20Años%20Valentina%20Calderón%20Vega&dates=${fecha}/${fechaFin}&location=Pronatura%20Park`;
+
+window.open(url);
+
+}
+
+
+/* WHATSAPP */
+
+function confirmar(){
+
+const mensaje=`Hola, confirmo asistencia a los XV años de Valentina Calderón Vega`;
+
+window.open(`https://wa.me/50683466734?text=${encodeURIComponent(mensaje)}`);
+
+}
+
+
+/* DRESS CODE */
 
 function abrirDressCode(){
 document.getElementById("dressModal").style.display="flex";
@@ -262,13 +315,8 @@ function cerrarDressCode(){
 document.getElementById("dressModal").style.display="none";
 }
 
-function confirmar(){
 
-const mensaje=`Hola, confirmo asistencia a los XV años de Valentina Calderón Vega`;
-
-window.open(`https://wa.me/50683466734?text=${encodeURIComponent(mensaje)}`);
-
-}
+/* COUNTDOWN */
 
 function updateCountdown(){
 
@@ -300,6 +348,7 @@ setInterval(updateCountdown,1000);
 
 </body>
 </html>
+
 
 
 
