@@ -67,8 +67,24 @@ width:80%;
 </head>
 <body>
 
+<img src="bola.png" class="bola">
+.bola {
+  width: 150px;
+  animation: girar 6s linear infinite;
+  transform-origin: center;
+}
 
-
+@keyframes girar {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+  .bola {
+  filter: drop-shadow(0px 10px 20px rgba(255,255,255,0.4));
+}
 <audio id="musica" loop preload="auto">
   <source src="./musica.mp3.mp3" type="audio/mpeg">
 </audio>
@@ -100,6 +116,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 <p>03 de octubre de 2026<br>5:00 p.m.<br>Pronatura Park</p>
 
+ 
 <button class="button" onclick="openWaze()">Ver en Waze</button>
 
 <h3 id="espaciosText"></h3>
@@ -174,6 +191,7 @@ setInterval(updateCountdown,1000);
 
 </body>
 </html>
+
 
 
 
