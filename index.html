@@ -8,6 +8,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Montserrat:wght@300;500&display=swap" rel="stylesheet">
 
 <style>
+
 .menu-premium{
 display:flex;
 flex-direction:column;
@@ -18,42 +19,26 @@ max-width:320px;
 }
 
 .btn-premium{
-
 padding:16px;
 border-radius:40px;
 border:1px solid rgba(255,255,255,0.3);
-
-background:linear-gradient(
-145deg,
-rgba(255,255,255,0.15),
-rgba(255,255,255,0.05)
-);
-
+background:linear-gradient(145deg, rgba(255,255,255,0.15), rgba(255,255,255,0.05));
 color:white;
-
 font-size:14px;
 letter-spacing:2px;
-
 backdrop-filter:blur(10px);
-
 cursor:pointer;
-
 transition:all 0.4s ease;
-
 box-shadow:
 0 0 10px rgba(255,255,255,0.1),
 inset 0 0 10px rgba(255,255,255,0.05);
-
 }
 
 .btn-premium:hover{
-
 transform:scale(1.05);
-
 box-shadow:
 0 0 20px rgba(255,255,255,0.3),
 inset 0 0 15px rgba(255,255,255,0.1);
-
 }
 
 body{
@@ -114,7 +99,7 @@ border:none;
 width:80%;
 }
 
-/* BOLA DE DISCOTECA GIRANDO */
+/* BOLA */
 .bola {
 position: fixed;
 top: 40px;
@@ -122,78 +107,103 @@ left: 50%;
 transform: translateX(-50%);
 width: 150px;
 animation: girar 6s linear infinite;
-transform-origin: center;
 filter: drop-shadow(0px 10px 20px rgba(255,255,255,0.4));
 z-index: 1000;
 }
 
 @keyframes girar {
-from {
-transform: translateX(-50%) rotate(0deg);
+0% { transform: translateX(-50%) rotate(0deg); }
+100% { transform: translateX(-50%) rotate(360deg); }
 }
-to {
-transform: translateX(-50%) rotate(360deg);
+
+/* MODAL */
+
+.modal{
+display:none;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.95);
+justify-content:center;
+align-items:center;
+z-index:9999;
+}
+
+.modal-content{
+text-align:center;
+color:white;
+animation:fadeIn 0.4s ease;
+}
+
+.close{
+position:absolute;
+top:20px;
+right:25px;
+font-size:30px;
+cursor:pointer;
+}
+
+@keyframes fadeIn{
+from{
+opacity:0;
+transform:scale(0.9);
+}
+to{
+opacity:1;
+transform:scale(1);
 }
 }
 
 </style>
 </head>
-<div id="dressModal" class="modal">
-
-  <div class="modal-content">
-
-    <span class="close" onclick="cerrarDressCode()">&times;</span>
-
-    <h2 class="silver-title">
-      Código de Vestimenta
-    </h2>
-
-    <p>
-
-      Formal elegante<br><br>
-
-      Tonos plateados, grises o claros<br><br>
-
-      Evitar blanco
-
-    </p>
-
-  </div>
-
-</div>
-
 
 <body>
+
+<!-- MODAL -->
+<div id="dressModal" class="modal">
+
+<div class="modal-content">
+
+<span class="close" onclick="cerrarDressCode()">&times;</span>
+
+<h2 class="silver-title">
+Código de Vestimenta
+</h2>
+
+<p>
+Formal elegante<br><br>
+Tonos plateados, grises o claros<br><br>
+Evitar blanco
+</p>
+
+</div>
+</div>
+
 
 <!-- BOLA -->
 <img src="bola.png" class="bola">
 
-<!-- AUDIO (NO MODIFICADO) -->
+<!-- AUDIO -->
 <audio id="musica" loop preload="auto">
-  <source src="./musica.mp3.mp3" type="audio/mpeg">
+<source src="./musica.mp3.mp3" type="audio/mpeg">
 </audio>
 
-<script>
-document.addEventListener("DOMContentLoaded", function() {
 
-  const boton = document.querySelector(".button");
-
-  boton.addEventListener("click", function() {
-    const audio = document.getElementById("musica");
-    audio.volume = 0.8;
-    audio.play();
-  });
-
-});
-</script>
-
-<!-- FASE 1 -->
+<!-- INTRO -->
 <div class="section" id="intro">
+
 <h1 class="silver-title">MIS XV AÑOS</h1>
-<button class="button" onclick="startInvitation()">Entrar a la fiesta</button>
+
+<button class="button" onclick="startInvitation()">
+Entrar a la fiesta
+</button>
+
 </div>
 
-<!-- FASE 2 -->
+
+<!-- MAIN -->
 <div class="section" id="main" style="display:none;">
 
 <h2 class="silver-title">Valentina Calderón Vega</h2>
@@ -218,30 +228,16 @@ Pronatura Park
 👗 CÓDIGO DE VESTIMENTA
 </button>
 
-<button class="btn-premium" onclick="abrirConfirmacion()">
+<button class="btn-premium" onclick="confirmar()">
 💌 CONFIRMAR ASISTENCIA
 </button>
 
 </div>
 
+</div>
+
 
 <script>
-
-const params = new URLSearchParams(window.location.search);
-const invitado = params.get('invitado') || "Invitado";
-const espacios = parseInt(params.get('espacios')) || 1;
-
-document.getElementById("espaciosText").innerText =
-"Espacios reservados para ti: " + espacios;
-
-const select = document.getElementById("asistiran");
-
-for(let i=1;i<=espacios;i++){
-let option=document.createElement("option");
-option.value=i;
-option.text=i;
-select.appendChild(option);
-}
 
 function startInvitation(){
 
@@ -255,21 +251,20 @@ music.play();
 }
 
 function openWaze(){
-
 window.open("https://waze.com/ul?q=Pronatura%20Park");
+}
 
+function abrirDressCode(){
+document.getElementById("dressModal").style.display="flex";
+}
+
+function cerrarDressCode(){
+document.getElementById("dressModal").style.display="none";
 }
 
 function confirmar(){
 
-const nombre=document.getElementById("nombre").value;
-const cantidad=document.getElementById("asistiran").value;
-
-const mensaje=`Hola, confirmo asistencia a los XV años de Valentina Calderón Vega.
-Invitado: ${invitado}
-Nombre: ${nombre}
-Espacios asignados: ${espacios}
-Confirmados: ${cantidad}`;
+const mensaje=`Hola, confirmo asistencia a los XV años de Valentina Calderón Vega`;
 
 window.open(`https://wa.me/50683466734?text=${encodeURIComponent(mensaje)}`);
 
@@ -305,8 +300,6 @@ setInterval(updateCountdown,1000);
 
 </body>
 </html>
-
-
 
 
 
