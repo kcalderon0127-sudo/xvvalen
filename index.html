@@ -33,18 +33,18 @@ padding:30px;
 
 .silver-title{
 font-family:'Playfair Display',serif;
-font-size:42px;
+font-size:40px;
 background:linear-gradient(90deg,#d9d9d9,#ffffff,#bfbfbf);
 -webkit-background-clip:text;
 -webkit-text-fill-color:transparent;
 margin-bottom:20px;
 }
 
-/* BOTON PRINCIPAL */
+/* BOTON INICIAL */
 
 .button{
-border:1px solid rgba(255,255,255,0.5);
-padding:15px 35px;
+border:1px solid #d9d9d9;
+padding:15px 30px;
 border-radius:40px;
 color:white;
 background:transparent;
@@ -59,7 +59,7 @@ margin-top:20px;
 display:flex;
 flex-direction:column;
 gap:15px;
-margin-top:30px;
+margin-top:25px;
 width:80%;
 max-width:320px;
 }
@@ -67,9 +67,7 @@ max-width:320px;
 .btn-premium{
 
 padding:16px;
-
 border-radius:40px;
-
 border:1px solid rgba(255,255,255,0.3);
 
 background:linear-gradient(
@@ -81,14 +79,13 @@ rgba(255,255,255,0.05)
 color:white;
 
 font-size:14px;
-
 letter-spacing:2px;
 
 backdrop-filter:blur(10px);
 
 cursor:pointer;
 
-transition:0.4s;
+transition:all 0.4s ease;
 
 box-shadow:
 0 0 10px rgba(255,255,255,0.1),
@@ -101,7 +98,7 @@ inset 0 0 10px rgba(255,255,255,0.05);
 transform:scale(1.05);
 
 box-shadow:
-0 0 25px rgba(255,255,255,0.4),
+0 0 20px rgba(255,255,255,0.3),
 inset 0 0 15px rgba(255,255,255,0.1);
 
 }
@@ -110,12 +107,12 @@ inset 0 0 15px rgba(255,255,255,0.1);
 
 .countdown{
 display:flex;
-gap:10px;
+gap:15px;
 margin-top:20px;
 }
 
 .count-box{
-border:1px solid rgba(255,255,255,0.3);
+border:1px solid #aaa;
 padding:10px;
 border-radius:10px;
 }
@@ -123,34 +120,49 @@ border-radius:10px;
 /* MODAL */
 
 .modal{
+
 display:none;
+
 position:fixed;
+
 top:0;
 left:0;
+
 width:100%;
 height:100%;
+
 background:rgba(0,0,0,0.95);
+
 justify-content:center;
 align-items:center;
+
 z-index:9999;
+
 }
 
 .modal-content{
+
+position:relative;
+
 text-align:center;
-animation:fadeIn 0.4s ease;
+
+color:white;
+
+padding:30px;
+
 }
 
 .close{
-position:absolute;
-top:25px;
-right:30px;
-font-size:35px;
-cursor:pointer;
-}
 
-@keyframes fadeIn{
-from{opacity:0; transform:scale(0.8);}
-to{opacity:1; transform:scale(1);}
+position:absolute;
+
+top:-10px;
+right:0px;
+
+font-size:35px;
+
+cursor:pointer;
+
 }
 
 </style>
@@ -160,42 +172,17 @@ to{opacity:1; transform:scale(1);}
 <body>
 
 <!-- AUDIO -->
-
 <audio id="musica" loop preload="auto">
 <source src="./musica.mp3.mp3" type="audio/mpeg">
 </audio>
-
-
-<!-- MODAL DRESS CODE -->
-
-<div id="dressModal" class="modal">
-
-<div class="modal-content">
-
-<span class="close" onclick="cerrarDressCode()">&times;</span>
-
-<h2 class="silver-title">Código de Vestimenta</h2>
-
-<p style="font-size:20px">
-
-Formal elegante<br><br>
-
-Tonos plateados, grises o claros<br><br>
-
-Evitar blanco
-
-</p>
-
-</div>
-
-</div>
-
 
 <!-- INTRO -->
 
 <div class="section" id="intro">
 
-<h1 class="silver-title">MIS XV AÑOS</h1>
+<h1 class="silver-title">
+MIS XV AÑOS
+</h1>
 
 <button class="button" onclick="startInvitation()">
 Entrar a la fiesta
@@ -203,25 +190,23 @@ Entrar a la fiesta
 
 </div>
 
-
 <!-- MAIN -->
 
 <div class="section" id="main" style="display:none;">
 
-<h2 class="silver-title">Valentina Calderón Vega</h2>
+<h2 class="silver-title">
+Valentina Calderón Vega
+</h2>
 
 <img src="Foto3.png" style="width:90%;border-radius:20px;">
 
 <div id="countdown" class="countdown"></div>
 
 <p>
-
 03 de octubre de 2026<br>
 5:00 p.m.<br>
 Pronatura Park
-
 </p>
-
 
 <div class="menu-premium">
 
@@ -237,30 +222,61 @@ Pronatura Park
 📅 AGENDAR EVENTO
 </button>
 
+<button class="btn-premium" onclick="abrirRecuerdos()">
+📸 CARGAR RECUERDOS
+</button>
+
 <button class="btn-premium" onclick="confirmar()">
 💌 CONFIRMAR ASISTENCIA
 </button>
 
-<button class="btn-premium" onclick="abrirMapa()">
-🗺️ VER MAPA
-</button>
-
 </div>
 
 </div>
 
+<!-- MODAL DRESS CODE -->
+
+<div id="dressModal" class="modal">
+
+<div class="modal-content">
+
+<span class="close" onclick="cerrarDressCode()">&times;</span>
+
+<h2 class="silver-title">
+Código de Vestimenta
+</h2>
+
+<p>
+Formal elegante<br><br>
+Tonos plateados, grises o claros<br><br>
+Evitar blanco
+</p>
+
+</div>
+
+</div>
 
 <script>
+
+/* PARAMETROS */
+
+const params=new URLSearchParams(window.location.search);
+
+const invitado=params.get('invitado')||"Invitado";
+
 
 /* INICIAR */
 
 function startInvitation(){
 
 document.getElementById("intro").style.display="none";
+
 document.getElementById("main").style.display="flex";
 
 const music=document.getElementById("musica");
+
 music.volume=0.8;
+
 music.play();
 
 }
@@ -269,14 +285,9 @@ music.play();
 /* WAZE */
 
 function openWaze(){
+
 window.open("https://waze.com/ul?q=Pronatura%20Park");
-}
 
-
-/* GOOGLE MAPS */
-
-function abrirMapa(){
-window.open("https://www.google.com/maps/search/?api=1&query=Pronatura+Park");
 }
 
 
@@ -285,11 +296,21 @@ window.open("https://www.google.com/maps/search/?api=1&query=Pronatura+Park");
 function agregarCalendario(){
 
 const fecha="20261003T170000";
+
 const fechaFin="20261003T230000";
 
-const url=`https://calendar.google.com/calendar/render?action=TEMPLATE&text=XV%20Años%20Valentina%20Calderón%20Vega&dates=${fecha}/${fechaFin}&location=Pronatura%20Park`;
+const url=`https://calendar.google.com/calendar/render?action=TEMPLATE&text=XV%20Valentina%20Calderón%20Vega&dates=${fecha}/${fechaFin}&location=Pronatura%20Park`;
 
 window.open(url);
+
+}
+
+
+/* RECUERDOS */
+
+function abrirRecuerdos(){
+
+window.open("https://docs.google.com/forms/d/1H5lpaA8m5TDWmy_-v-TeAnGO709gMx_Rq-nNj_UDOvg/viewform");
 
 }
 
@@ -298,7 +319,7 @@ window.open(url);
 
 function confirmar(){
 
-const mensaje=`Hola, confirmo asistencia a los XV años de Valentina Calderón Vega`;
+const mensaje=`Hola, confirmo asistencia a los XV años de Valentina Calderón Vega. Invitado: ${invitado}`;
 
 window.open(`https://wa.me/50683466734?text=${encodeURIComponent(mensaje)}`);
 
@@ -308,11 +329,15 @@ window.open(`https://wa.me/50683466734?text=${encodeURIComponent(mensaje)}`);
 /* DRESS CODE */
 
 function abrirDressCode(){
+
 document.getElementById("dressModal").style.display="flex";
+
 }
 
 function cerrarDressCode(){
+
 document.getElementById("dressModal").style.display="none";
+
 }
 
 
@@ -327,8 +352,11 @@ const now=new Date().getTime();
 const diff=eventDate-now;
 
 const days=Math.floor(diff/(1000*60*60*24));
+
 const hours=Math.floor((diff%(1000*60*60*24))/(1000*60*60));
+
 const minutes=Math.floor((diff%(1000*60*60))/(1000*60));
+
 const seconds=Math.floor((diff%(1000*60))/1000);
 
 document.getElementById("countdown").innerHTML=`
@@ -348,9 +376,6 @@ setInterval(updateCountdown,1000);
 
 </body>
 </html>
-
-
-
 
 
 
