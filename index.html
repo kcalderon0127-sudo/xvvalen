@@ -74,16 +74,24 @@ width:80%;
   transform-origin: center;
 }
 
-@keyframes girar {
+ @keyframes girar {
   from {
-    transform: rotate(0deg);
+    transform: translateX(-50%) rotate(0deg);
   }
   to {
-    transform: rotate(360deg);
+    transform: translateX(-50%) rotate(360deg);
   }
 }
   .bola {
   filter: drop-shadow(0px 10px 20px rgba(255,255,255,0.4));
+}
+  @keyframes girar {
+  from {
+    transform: translateX(-50%) rotate(0deg);
+  }
+  to {
+    transform: translateX(-50%) rotate(360deg);
+  }
 }
 <audio id="musica" loop preload="auto">
   <source src="./musica.mp3.mp3" type="audio/mpeg">
@@ -191,6 +199,7 @@ setInterval(updateCountdown,1000);
 
 </body>
 </html>
+
 
 
 
