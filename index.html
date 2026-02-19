@@ -8,6 +8,53 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Montserrat:wght@300;500&display=swap" rel="stylesheet">
 
 <style>
+.menu-premium{
+display:flex;
+flex-direction:column;
+gap:15px;
+margin-top:25px;
+width:80%;
+max-width:320px;
+}
+
+.btn-premium{
+
+padding:16px;
+border-radius:40px;
+border:1px solid rgba(255,255,255,0.3);
+
+background:linear-gradient(
+145deg,
+rgba(255,255,255,0.15),
+rgba(255,255,255,0.05)
+);
+
+color:white;
+
+font-size:14px;
+letter-spacing:2px;
+
+backdrop-filter:blur(10px);
+
+cursor:pointer;
+
+transition:all 0.4s ease;
+
+box-shadow:
+0 0 10px rgba(255,255,255,0.1),
+inset 0 0 10px rgba(255,255,255,0.05);
+
+}
+
+.btn-premium:hover{
+
+transform:scale(1.05);
+
+box-shadow:
+0 0 20px rgba(255,255,255,0.3),
+inset 0 0 15px rgba(255,255,255,0.1);
+
+}
 
 body{
 margin:0;
@@ -91,6 +138,28 @@ transform: translateX(-50%) rotate(360deg);
 
 </style>
 </head>
+<div id="dressModal" class="modal">
+
+<div class="modal-content">
+
+<span class="close" onclick="cerrarDressCode()">&times;</span>
+
+<h2 class="silver-title" style="font-size:28px;">
+Código de Vestimenta
+</h2>
+
+<p style="font-size:18px;">
+
+Formal elegante<br><br>
+
+Tonos plateados, grises o claros<br><br>
+
+Evitar blanco
+
+</p>
+
+</div>
+</div>
 
 <body>
 
@@ -137,17 +206,22 @@ document.addEventListener("DOMContentLoaded", function() {
 Pronatura Park
 </p>
 
-<button class="button" onclick="openWaze()">Ver en Waze</button>
+<div class="menu-premium">
 
-<h3 id="espaciosText"></h3>
+<button class="btn-premium" onclick="openWaze()">
+📍 UBICACIÓN
+</button>
 
-<input type="text" id="nombre" placeholder="Tu nombre">
+<button class="btn-premium" onclick="abrirDressCode()">
+👗 CÓDIGO DE VESTIMENTA
+</button>
 
-<select id="asistiran"></select>
-
-<button class="button" onclick="confirmar()">Confirmar asistencia</button>
+<button class="btn-premium" onclick="abrirConfirmacion()">
+💌 CONFIRMAR ASISTENCIA
+</button>
 
 </div>
+
 
 <script>
 
@@ -229,6 +303,7 @@ setInterval(updateCountdown,1000);
 
 </body>
 </html>
+
 
 
 
